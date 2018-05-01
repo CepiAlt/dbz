@@ -30,10 +30,7 @@ var listado = ["mew", "mewtwo", "rayquaza", "moltres", "articuno", "celebi", "ze
 
 client.on('ready', () => {
     console.log('I am ready!');
-    var file = new File(script.file.parent, 'list.json');
-    file.open();
-    myList = Json.decode(file.readAll());
-    file.close();
+    myList = JSON.parse(fs.readFileSync("./list.json", "utf8"));
     //timer = setTimeout(step, interval);
 });
 
@@ -106,23 +103,27 @@ client.on('message', message => {
     if (message.content.includes('$add') && message.content.split(' ').length > 1) { 
         var toadd = message.content.replace('$add ','');
         message.channel.send('Added pokemon to list: ' + toadd);
-        var file = new File(script.file.parent, 'list.json');
-        if (file.exists())
-            file.remove();
-        file.open();
-        file.write(Json.encode(myList));
-        file.close();
+        fs.unlinkSync("./object.json");
+        fs.writeFile("./object.json", JSON.stringify(myList), (err) => {
+            if (err) {
+                console.error(err);
+                return;
+            };
+            console.log("File has been created");
+        });
     }
 
     if (message.content.includes('$remove') && message.content.split(' ').length > 1) { 
         var torem = message.content.replace('$remove ','');
         message.channel.send('Added pokemon to list: ' + torem);
-        var file = new File(script.file.parent, 'list.json');
-        if (file.exists())
-            file.remove();
-        file.open();
-        file.write(Json.encode(myList));
-        file.close();
+        fs.unlinkSync("./object.json");
+        fs.writeFile("./object.json", JSON.stringify(myList), (err) => {
+            if (err) {
+                console.error(err);
+                return;
+            };
+            console.log("File has been created");
+        });
     }
     
     if (infoid.indexOf(message.channel.id) > -1) {
