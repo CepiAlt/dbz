@@ -132,7 +132,7 @@ client.on('message', message => {
                 //message.channel.send(images[name]);
                 realname = images[name];
                 if (realname.length >0) {
-                    if (listado.indexOf(realname) > -1)
+                    if (myList.indexOf(realname) > -1)
                         message.channel.send('p!catch ' + realname);
                     else
                         message.channel.send('A wild ' + realname + ' has appeared');
