@@ -101,8 +101,8 @@ client.on('message', message => {
 
     if (message.content.includes('$add') && message.content.split(' ').length > 1) { 
         var toadd = message.content.replace('$add ','');
-        fs.unlinkSync("./object.json");
-        fs.writeFile("./object.json", JSON.stringify(myList), (err) => {
+        fs.unlinkSync("./list.json");
+        fs.writeFile("./list.json", JSON.stringify(myList), (err) => {
             if (err) {
                 message.channel.send('Error adding pokemon');
                 return;
@@ -113,8 +113,8 @@ client.on('message', message => {
 
     if (message.content.includes('$remove') && message.content.split(' ').length > 1) { 
         var torem = message.content.replace('$remove ','');
-        fs.unlinkSync("./object.json");
-        fs.writeFile("./object.json", JSON.stringify(myList), (err) => {
+        fs.unlinkSync("./list.json");
+        fs.writeFile("./list.json", JSON.stringify(myList), (err) => {
             if (err) {
                 message.channel.send('Error removing pokemon');
                 return;
