@@ -3,7 +3,7 @@ const fs = require("fs");
 const client = new Discord.Client();
 const images = JSON.parse(fs.readFileSync("./pokemonrefs.json", "utf8"));
 
-var myList = [];
+var myList = JSON.parse(fs.readFileSync("./list.json", "utf8"));
 var interval;
 var spamid = [];
 var infoid = [];
@@ -30,7 +30,6 @@ var listado = ["mew", "mewtwo", "rayquaza", "moltres", "articuno", "celebi", "ze
 
 client.on('ready', () => {
     console.log('I am ready!');
-    myList = JSON.parse(fs.readFileSync("./list.json", "utf8"));
     //timer = setTimeout(step, interval);
 });
 
@@ -97,32 +96,30 @@ client.on('message', message => {
     }
   
     if (message.content === '$list') { 
-        message.channel.send('Pokemon to catch: ' + infoid.join(' '));
+        message.channel.send('Pokemon to catch: ' + myList.join(' '));
     }
 
     if (message.content.includes('$add') && message.content.split(' ').length > 1) { 
         var toadd = message.content.replace('$add ','');
-        message.channel.send('Added pokemon to list: ' + toadd);
         fs.unlinkSync("./object.json");
         fs.writeFile("./object.json", JSON.stringify(myList), (err) => {
             if (err) {
-                console.error(err);
+                message.channel.send('Error adding pokemon');
                 return;
             };
-            console.log("File has been created");
+            message.channel.send('Added pokemon to list: ' + toadd);
         });
     }
 
     if (message.content.includes('$remove') && message.content.split(' ').length > 1) { 
         var torem = message.content.replace('$remove ','');
-        message.channel.send('Added pokemon to list: ' + torem);
         fs.unlinkSync("./object.json");
         fs.writeFile("./object.json", JSON.stringify(myList), (err) => {
             if (err) {
-                console.error(err);
+                message.channel.send('Error removing pokemon');
                 return;
             };
-            console.log("File has been created");
+            message.channel.send('Removed pokemon to list: ' + toadd);
         });
     }
     
