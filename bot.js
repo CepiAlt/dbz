@@ -95,7 +95,7 @@ client.on('message', message => {
                 //message.channel.send(images[name]);
                 realname = images[name];
                 if (realname.length >0)
-                    message.channel.send('A wild ' + realname + ' has appeared');
+                    message.channel.send('p!catch ' + realname);
             }
         }
     }
