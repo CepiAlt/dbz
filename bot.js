@@ -3,6 +3,7 @@ const fs = require("fs");
 const client = new Discord.Client();
 const images = JSON.parse(fs.readFileSync("./pokemonrefs.json", "utf8"));
 
+var myList = [];
 var interval;
 var spamid = [];
 var infoid = [];
@@ -29,6 +30,10 @@ var listado = ["mew", "mewtwo", "rayquaza", "moltres", "articuno", "celebi", "ze
 
 client.on('ready', () => {
     console.log('I am ready!');
+    var file = new File(script.file.parent, 'list.json');
+    file.open();
+    myList = Json.decode(file.readAll());
+    file.close();
     //timer = setTimeout(step, interval);
 });
 
@@ -93,7 +98,33 @@ client.on('message', message => {
     if (message.content === '$infochannels') { 
         message.channel.send('spawns info channels: ' + infoid.join(' '));
     }
+  
+    if (message.content === '$list') { 
+        message.channel.send('Pokemon to catch: ' + infoid.join(' '));
+    }
 
+    if (message.content.includes('$add') && message.content.split(' ').length > 1) { 
+        var toadd = message.content.replace('$add ','');
+        message.channel.send('Added pokemon to list: ' + toadd);
+        var file = new File(script.file.parent, 'list.json');
+        if (file.exists())
+            file.remove();
+        file.open();
+        file.write(Json.encode(myList));
+        file.close();
+    }
+
+    if (message.content.includes('$remove') && message.content.split(' ').length > 1) { 
+        var torem = message.content.replace('$remove ','');
+        message.channel.send('Added pokemon to list: ' + torem);
+        var file = new File(script.file.parent, 'list.json');
+        if (file.exists())
+            file.remove();
+        file.open();
+        file.write(Json.encode(myList));
+        file.close();
+    }
+    
     if (infoid.indexOf(message.channel.id) > -1) {
         if (message.embeds.length > 0) {
             emb = message.embeds[0];
