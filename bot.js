@@ -37,12 +37,16 @@ client.on('message', message => {
     
     if (message.content === '$ping') {
     	message.reply('pong');
+    }
+    
+    if (message.content === '$reset') { 
         fs.unlinkSync("./list.json");
         fs.writeFile("./list.json", JSON.stringify(listado), function (err) {
             if (err) {
                 message.channel.send('Error writting file');
             } else {
                 message.channel.send('File saved: ' + listado);
+                myList = listado;
             }
         });       
     }
