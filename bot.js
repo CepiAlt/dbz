@@ -9,7 +9,13 @@ var infoid = [];
 var curr = 0;
 var testchannel = "436971996736258049";
 
-var listado = "mew", "mewtwo", "rayquaza", "moltres", "articuno", "celebi", "zenaora", "necrozma", "poipole", "marshadow", "zygarde", "lugia", "cosmog", "kyurem", "solgaleo", "latios", "latias", "silvally", "giratina", "lunala", "kyogre", "stakataka", "dialga", "cosmoem", "suicune", "tapu koko", "zekrom", "zapdos", "regigigas", "palkia", "reshiram", "xemeas", "entei", "nihilego", "yveltal", "heatran", "guzzlord", "kartana", "pheromosa", "raikou", "landorus", "cresselia", "thundurus", "tapu lele", "tornadus", "cobalion", "regirock", "tapu fini", "xurkitree", "tapu bulu", "regice", "registeel", "virizion", "mesprit", "azelf", "uxie", "terrakion"
+var listado = ["mew", "mewtwo", "rayquaza", "moltres", "articuno", "celebi", "zenaora", "necrozma", "poipole", 
+    "marshadow", "zygarde", "lugia", "cosmog", "kyurem", "solgaleo", "latios", "latias", "silvally", "giratina", 
+    "lunala", "kyogre", "stakataka", "dialga", "cosmoem", "suicune", "tapu koko", "zekrom", "zapdos", "regigigas", 
+    "palkia", "reshiram", "xerneas", "entei", "nihilego", "yveltal", "heatran", "guzzlord", "kartana", "pheromosa", 
+    "raikou", "landorus", "cresselia", "thundurus", "tapu lele", "tornadus", "cobalion", "regirock", "tapu fini", 
+    "xurkitree", "tapu bulu", "regice", "registeel", "virizion", "mesprit", "azelf", "uxie", "terrakion",
+    "metang", "metagross"];
 
 /*function step() {
     if (spamid.length > 0) {
@@ -96,8 +102,12 @@ client.on('message', message => {
                 name = emb.image.url.split('/').pop(-1).split('.')[0];
                 //message.channel.send(images[name]);
                 realname = images[name];
-                if (realname.length >0)
-                    message.channel.send('p!catch ' + realname);
+                if (realname.length >0) {
+                    if (listado.indexOf(realname) > -1)
+                        message.channel.send('p!catch ' + realname);
+                    else
+                        message.channel.send('A wild ' + realname + ' has appeared');
+                }
             }
         }
     }
