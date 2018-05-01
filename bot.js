@@ -3,7 +3,7 @@ const fs = require("fs");
 const client = new Discord.Client();
 const images = JSON.parse(fs.readFileSync("./pokemonrefs.json", "utf8"));
 
-var myList = JSON.parse(fs.readFileSync("./list.json", "utf8"));
+//var myList = JSON.parse(fs.readFileSync("./list.json", "utf8"));
 var interval;
 var spamid = [];
 var infoid = [];
@@ -39,7 +39,7 @@ client.on('message', message => {
     	message.reply('pong');
     }
     
-    if (message.content === '$reset') { 
+    /*if (message.content === '$reset') { 
         fs.unlinkSync("./list.json");
         fs.writeFile("./list.json", JSON.stringify(listado), function (err) {
             if (err) {
@@ -49,7 +49,7 @@ client.on('message', message => {
                 myList = listado;
             }
         });       
-    }
+    }*/
     
     if (message.content === '$spam') { 
         if (spamid.indexOf(message.channel.id) < 0) {
@@ -108,40 +108,42 @@ client.on('message', message => {
     }
   
     if (message.content === '$list') { 
-        message.channel.send('Pokemon to catch: ' + myList.join(' '));
+        message.channel.send('Pokemon to catch: \n' + listado.join(' '));
     }
 
     if (message.content.includes('$add') && message.content.split(' ').length > 1) { 
         var toadd = message.content.replace('$add ','');
-        var index = myList.indexOf(toadd);
+        var index = listado.indexOf(toadd);
         if (index > -1) {
-            myList.splice(index, 1);
+            listado.splice(index, 1);
         }
-        myList.push(toadd);
-        fs.unlinkSync("./list.json");
+        listado.push(toadd);
+        /*fs.unlinkSync("./list.json");
         fs.writeFile("./list.json", JSON.stringify(myList), function (err) {
             if (err) {
                 message.channel.send('Error adding pokemon');
             } else {
                 message.channel.send('Added pokemon to list: ' + toadd);
             }
-        });
+        });*/
+        message.channel.send('Added pokemon to list: ' + toadd);
     }
 
     if (message.content.includes('$remove') && message.content.split(' ').length > 1) { 
         var torem = message.content.replace('$remove ','');
-        var index = myList.indexOf(torem);
+        var index = listado.indexOf(torem);
         if (index > -1) {
-            myList.splice(index, 1);
+            listado.splice(index, 1);
         }
-        fs.unlinkSync("./list.json");
+        /*fs.unlinkSync("./list.json");
         fs.writeFile("./list.json", JSON.stringify(myList), function (err) {
             if (err) {
                 message.channel.send('Error removing pokemon');
             } else {
                 message.channel.send('Removed pokemon to list: ' + toadd);
             }
-        });
+        });*/
+        message.channel.send('Removed pokemon to list: ' + toadd);
     }
     
     if (infoid.indexOf(message.channel.id) > -1) {
