@@ -101,25 +101,34 @@ client.on('message', message => {
 
     if (message.content.includes('$add') && message.content.split(' ').length > 1) { 
         var toadd = message.content.replace('$add ','');
+        var index = myList.indexOf(toadd);
+        if (index > -1) {
+            myList.splice(index, 1);
+        }
+        myList.push(toadd);
         fs.unlinkSync("./list.json");
-        fs.writeFile("./list.json", JSON.stringify(myList), (err) => {
+        fs.writeFile("./list.json", JSON.stringify(myList), function (err) {
             if (err) {
                 message.channel.send('Error adding pokemon');
-                return;
-            };
-            message.channel.send('Added pokemon to list: ' + toadd);
+            } else {
+                message.channel.send('Added pokemon to list: ' + toadd);
+            }
         });
     }
 
     if (message.content.includes('$remove') && message.content.split(' ').length > 1) { 
         var torem = message.content.replace('$remove ','');
+        var index = myList.indexOf(torem);
+        if (index > -1) {
+            myList.splice(index, 1);
+        }
         fs.unlinkSync("./list.json");
-        fs.writeFile("./list.json", JSON.stringify(myList), (err) => {
+        fs.writeFile("./list.json", JSON.stringify(myList), function (err) {
             if (err) {
                 message.channel.send('Error removing pokemon');
-                return;
-            };
-            message.channel.send('Removed pokemon to list: ' + toadd);
+            } else {
+                message.channel.send('Removed pokemon to list: ' + toadd);
+            }
         });
     }
     
