@@ -54,7 +54,26 @@ client.on('message', message => {
             }
         });       
     }*/
-    
+  
+    if (message.content.includes('$spam') && message.content.split(' ').length > 1) { 
+        var str = message.content.replace('$spam ','');
+     
+        if (spamid.indexOf(message.channel.id) < 0) {
+            spamid.push(message.channel.id);
+        }
+        message.channel.send('spam enabled');
+        
+        clearInterval(interval);
+        interval = setInterval(function() {
+            if (spamid[curr] === undefined) {
+                curr = 0;
+            }
+            //client.channels.get(testchannel).send('spamming into ' + spamid[curr]);
+            client.channels.get(spamid[curr]).send(str);
+            curr++;
+        }, 2000);
+    }
+  
     if (message.content === '$spam') { 
         if (spamid.indexOf(message.channel.id) < 0) {
             spamid.push(message.channel.id);
