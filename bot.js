@@ -10,13 +10,17 @@ var infoid = [];
 var curr = 0;
 var testchannel = "436971996736258049";
 
-var listado = ["mew", "mewtwo", "rayquaza", "moltres", "articuno", "celebi", "zenaora", "necrozma", "poipole", 
-    "marshadow", "zygarde", "lugia", "cosmog", "kyurem", "solgaleo", "latios", "latias", "silvally", "giratina", 
-    "lunala", "kyogre", "stakataka", "dialga", "cosmoem", "suicune", "tapu koko", "zekrom", "zapdos", "regigigas", 
-    "palkia", "reshiram", "xerneas", "entei", "nihilego", "yveltal", "heatran", "guzzlord", "kartana", "pheromosa", 
-    "raikou", "landorus", "cresselia", "thundurus", "tapu lele", "tornadus", "cobalion", "regirock", "tapu fini", 
-    "xurkitree", "tapu bulu", "regice", "registeel", "virizion", "mesprit", "azelf", "uxie", "terrakion",
-    "metang", "metagross"];
+var listado = ["mew", "mewtwo", "rayquaza", "moltres", "articuno", "celebi", "zenaora", "necrozma",
+               "poipole", "marshadow", "zygarde", "lugia", "cosmog", "kyurem", "solgaleo", "latios", 
+               "latias", "silvally", "giratina", "lunala", "kyogre", "stakataka", "dialga", "cosmoem", 
+               "suicune", "tapu koko", "zekrom", "zapdos", "regigigas", "palkia", "reshiram", "xemeas", 
+               "entei", "nihilego", "yveltal", "heatran", "guzzlord", "kartana", "pheromosa", "raikou", 
+               "landorus", "cresselia", "thundurus", "tapu lele", "tornadus", "cobalion", "regirock", 
+               "tapu fini", "xurkitree", "tapu bulu", "regice", "registeel", "virizion", "mesprit", 
+               "azelf", "uxie", "terrakion", "metang", "metagross", "blacephalon", "ho-oh", "beldum", 
+               "groudon", "jirachi", "deoxys", "darkrai", "arceus", "victini", "genesect", "keldeo", 
+               "meloetta", "volcanion", "hoopa", "type: null", "minior", "buzzwole", "celesteela", 
+               "magearna", "naganadel"];
 
 /*function step() {
     if (spamid.length > 0) {
