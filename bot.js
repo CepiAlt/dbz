@@ -115,7 +115,7 @@ client.on('message', message => {
         message.channel.send('spam channels: ' + spamid.join(' '));
     }
 
-    if (message.content === '$info') {
+    if (message.content === '$catch') {
         var index = infoid.indexOf(message.channel.id);
         if (index > -1) {
             infoid.splice(index, 1);
